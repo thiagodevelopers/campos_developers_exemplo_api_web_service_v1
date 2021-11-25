@@ -21,7 +21,7 @@ class DBConnectionHandler:
     """Sqlalchemy database connection"""
 
     def __init__(self):
-        self.__connection_string = "sqlite://storage.db"
+        self.__connection_string = "sqlite:///storage.db"
         self.session = None
 
     def get_engine(self):
@@ -30,7 +30,7 @@ class DBConnectionHandler:
         :return - engine connection to database
         """
 
-        engine = create_engine(self.__connection_string, echo=True)
+        engine = create_engine(self.__connection_string)
 
         return engine
     

@@ -12,8 +12,8 @@ from src.infra.config import Base
 class PersonType(enum.Enum):
     """ Defining people types """
 
-    fisica = "Pessoa Física"
-    juridica = "Pessoa Jurídica"
+    fisica = "Fisica"
+    juridica = "Juridica"
 
 class Clients(Base):
     """ Clients Entity """
