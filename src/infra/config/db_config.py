@@ -21,9 +21,7 @@ class DBConnectionHandler:
     """Sqlalchemy database connection"""
 
     def __init__(self):
-        self.__connection_string = (
-            "postgresql+psycopg2://postgres:Postgres2021!@localhost/clients"
-        )
+        self.__connection_string = "sqlite://storage.db"
         self.session = None
 
     def get_engine(self):
