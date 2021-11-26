@@ -1,6 +1,6 @@
-from collections import namedtuple
+from src.domain.models import Clients
 from src.infra.config import DBConnectionHandler
-from src.infra.entities import Clients
+from src.infra.entities import Clients as ClientsModel
 
 
 class ClientRepository:
@@ -14,15 +14,13 @@ class ClientRepository:
         :return - tuple with new client inserted
         """
 
-        insert_data = namedtuple("clients", "id, type, name")
-
         with DBConnectionHandler() as db_connection:
             try:
-                new_client = Clients(type=type_person, name=name_person)
+                new_client = ClientsModel(type=type_person, name=name_person)
                 db_connection.session.add(new_client)
                 db_connection.session.commit()
 
-                return insert_data(
+                return Clients(
                     id=new_client.id, type=new_client.type, name=new_client.name
                 )
             except:
