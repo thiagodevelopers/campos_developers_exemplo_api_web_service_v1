@@ -13,6 +13,7 @@ class ClientRepository:
         :param - type_person: type of person Física or Jurídica
         :param - name_person: name of person
         :return - tuple with new client inserted
+        comentário de teste
         """
 
         with DBConnectionHandler() as db_connection:
