@@ -1,3 +1,4 @@
+from typing import List
 from src.domain.models import Clients
 from src.infra.config import DBConnectionHandler
 from src.infra.entities import Clients as ClientsModel
@@ -28,3 +29,57 @@ class ClientRepository:
                 raise
             finally:
                 db_connection.session.close()
+
+    @classmethod
+    def select_client_by_id(cls, client_id: int) -> List[Clients]:
+        """
+        Select data in client entity by id
+        :param - client_id: Id of the registry
+        :return - List with clients selected
+        """
+
+        try:
+            query_data = None
+
+            with DBConnectionHandler() as db_connection:
+                data = (
+                    db_connection.session.query(ClientsModel)
+                    .filter_by(id=client_id)
+                    .one()
+                )
+                query_data = [data]
+
+            return query_data
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()
+
+        return None
+
+    @classmethod
+    def select_client_by_name(cls, name: str = None) -> List[Clients]:
+        """
+        Select data in client entity by name
+        :param - name: Clients name
+        :return - List with clients selected
+        """
+
+        try:
+            query_data = None
+
+            with DBConnectionHandler() as db_connection:
+                data = (
+                    db_connection.session.query(ClientsModel).filter_by(name=name).one()
+                )
+                query_data = [data]
+
+            return query_data
+        except:
+            db_connection.session.rollback()
+            raise
+        finally:
+            db_connection.session.close()
+
+        return None
